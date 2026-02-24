@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Eduardo Pena — Software Engineer</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 40px; background: #fff; border-bottom: 1px solid #eee;
+      position: sticky; top: 0; z-index: 100;
+    }
+    nav .logo { font-size: 1.2em; font-weight: 700; }
+    nav a { text-decoration: none; color: #444; margin-left: 24px; font-size: 0.95em; }
+    .hero {
+      display: flex; align-items: center; gap: 40px;
+      padding: 70px 60px; background: #f8f9fb;
+    }
+    .hero img {
+      width: 200px; height: 200px; border-radius: 50%;
+      object-fit: cover; object-position: top; border: 4px solid #1a1a2e; flex-shrink: 0;
+    }
+    .hero h1 { font-size: 2.4em; margin-bottom: 8px; }
+    .hero .sub { font-size: 1.05em; color: #555; line-height: 1.6; margin-bottom: 14px; }
+    .cta-btn {
+      display: inline-block; margin-top: 14px; padding: 12px 28px;
+      background: #1a1a2e; color: #fff; border-radius: 6px; text-decoration: none;
+    }
+    section { padding: 55px 60px; }
+    section h2 { font-size: 1.6em; margin-bottom: 14px; }
+    section p { font-size: 1em; color: #444; line-height: 1.7; max-width: 720px; }
+    .tag {
+      display: inline-block; font-size: 0.78em; font-weight: 700;
+      background: #e8f4fd; border: 1px solid #90caf9;
+      color: #0d47a1; padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .authority { background: #f0fdf4; }
+    .quote-card {
+      margin-top: 18px; background: #fff; border-left: 4px solid #2ecc71;
+      padding: 16px 22px; max-width: 580px; font-style: italic; color: #333;
+    }
+    .social { background: #fff; }
+    .social ul { padding-left: 20px; color: #444; line-height: 2.1; margin-top: 14px; }
+    .nature { background: #f9fafb; }
+    .dichotomy { background: #fff8e1; }
+    table { border-collapse: collapse; width: 100%; max-width: 580px; margin-top: 18px; }
+    th, td { padding: 12px 18px; border: 1px solid #ccc; text-align: center; font-size: 0.95em; }
+    thead th:first-child { background: #c0392b; color: #fff; }
+    thead th:last-child  { background: #27ae60; color: #fff; }
+    .testimonials { background: #fff; }
+    .cards { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 18px; }
+    .card {
+      background: #f8f9fb; border: 1px solid #ddd; border-radius: 8px;
+      padding: 18px; max-width: 250px; font-size: 0.93em; line-height: 1.5;
+    }
+    .contact-section { background: #fff; padding: 55px 60px; }
+    .contact-form {
+      background: #fff8e1; border: 2px solid #ffc107;
+      padding: 32px 36px; max-width: 540px; border-radius: 8px;
+    }
+    .contact-form h2 { margin-bottom: 6px; }
+    .contact-form .subtitle { margin-bottom: 18px; font-size: 0.92em; color: #666; }
+    .contact-form input[type="text"],
+    .contact-form input[type="email"],
+    .contact-form textarea {
+      width: 100%; padding: 10px; margin-bottom: 12px;
+      border: 1px solid #ccc; border-radius: 4px; font-size: 0.95em; font-family: inherit;
+    }
+    .contact-form textarea { height: 88px; resize: vertical; }
+    .checkbox-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 14px; }
+    .checkbox-row input { margin-top: 3px; flex-shrink: 0; }
+    .checkbox-row label { font-size: 0.82em; color: #666; line-height: 1.4; }
+    .dark-tag {
+      display: inline-block; font-size: 0.78em; font-weight: 700;
+      background: #fce4ec; border: 1px solid #f48fb1;
+      color: #880e4f; padding: 3px 9px; border-radius: 4px; margin-bottom: 10px;
+    }
+    .contact-form button {
+      background: #1a1a2e; color: #fff; border: none;
+      padding: 12px 28px; border-radius: 5px; font-size: 1em; cursor: pointer;
+    }
+    .key { background: #eef2ff; border-top: 3px dashed #4f46e5; padding: 55px 60px; }
+    .key h2 { color: #4f46e5; margin-bottom: 16px; font-size: 1.5em; }
+    .key ol { padding-left: 22px; line-height: 2.1; color: #333; max-width: 760px; }
+    .key h3 { color: #4f46e5; margin: 20px 0 8px; }
+    .key .dark-desc { max-width: 760px; color: #333; line-height: 1.7; }
+    footer {
+      background: #1a1a2e; color: #aaa;
+      text-align: center; padding: 20px 40px; font-size: 0.82em;
+    }
+    @media (max-width: 650px) {
+      .hero { flex-direction: column; padding: 36px 24px; }
+      section, .contact-section, .key { padding: 36px 24px; }
+      .contact-form { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Eduardo Pena</div>
+  <div>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO + SLIPPERY SLOPE -->
+<section class="hero">
+  <img src="eduardoheadshot.JPG" alt="Eduardo Pena" />
+  <div>
+    <h1>Eduardo Pena</h1>
+    <p class="sub">Software Engineering Intern @ Morgan Stanley &nbsp;·&nbsp; UF Computer Science &nbsp;·&nbsp; Builder & Leader</p>
+    <span class="tag">[FALLACY: Slippery Slope]</span>
+    <p>Don't wait. If you don't reach out now, someone else will. That person gets the referral, then the interview, then the offer — and you'll be left wondering why you hesitated. One message is all it takes.</p>
+    <a href="#contact" class="cta-btn">Get in Touch</a>
+  </div>
+</section>
+
+<!-- APPEAL TO AUTHORITY -->
+<section class="authority" id="about">
+  <span class="tag">[FALLACY: Appeal to Authority]</span>
+  <h2>Endorsed by Industry Leaders</h2>
+  <p>Eduardo was personally selected for the Morgan Stanley Technology internship — one of Wall Street's most competitive programs. If their engineering team chose him out of thousands of applicants, that's all the proof you need.</p>
+  <div class="quote-card">
+    "Eduardo stood out immediately. His technical depth and collaborative mindset made him one of our most impactful interns."<br/><br/>
+    <strong>— Senior Director, Advisory Product Technology, Morgan Stanley</strong>
+  </div>
+</section>
+
+<!-- AD POPULUM / BANDWAGON -->
+<section class="social" id="experience">
+  <span class="tag">[FALLACY: Ad Populum / Bandwagon]</span>
+  <h2>300+ People Already Rely on His Work</h2>
+  <p>As Software Engineering Director at SHPE, Eduardo built and maintained tools used by over 300 members every day. If that many of your peers trust his code, they must know something. Don't be the last one to notice.</p>
+  <ul>
+    <li><strong>Morgan Stanley</strong> — Technology Summer Intern, Wealth Management Advisory Product Tech (NYC, Summer 2025)</li>
+    <li><strong>SHPE @ UF</strong> — Software Engineering Director (Jan 2024–Present)</li>
+    <li><strong>Machen Florida Opportunity Scholars</strong> — Peer Mentor, Leadership Team (Aug 2023–Present)</li>
+  </ul>
+</section>
+
+<!-- APPEAL TO NATURE -->
+<section class="nature">
+  <span class="tag">[FALLACY: Appeal to Nature]</span>
+  <h2>Organically Grown Skills — No Bootcamp Shortcuts</h2>
+  <p>Eduardo's engineering skills weren't manufactured in a 12-week crash course. They developed naturally — through years of real projects, real teams, and real deadlines. Organic experience is always more reliable. If it wasn't earned the hard way, can you really trust it?</p>
+</section>
+
+<!-- FALSE DICHOTOMY -->
+<section class="dichotomy">
+  <span class="tag">[FALLACY: False Dichotomy]</span>
+  <h2>Two Options. That's It.</h2>
+  <p>You're either working with someone who's interned at Morgan Stanley, led a 300-person engineering org, and mentored first-gen college students — or you're settling for less. There's no middle ground.</p>
+  <table>
+    <thead>
+      <tr><th>Without Eduardo</th><th>With Eduardo</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Slower delivery, missed deadlines</td>
+        <td>Clean code, shipped on time</td>
+      </tr>
+      <tr>
+        <td>No leadership or mentorship experience</td>
+        <td>Proven leader at scale</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- HASTY GENERALIZATION -->
+<section class="testimonials">
+  <span class="tag">[FALLACY: Hasty Generalization]</span>
+  <h2>Everyone Who's Worked with Him Says the Same Thing</h2>
+  <p>We asked a few people who've collaborated with Eduardo, and every single one called him exceptional. That's basically a unanimous verdict — if everyone agrees, it must be universally true.</p>
+  <div class="cards">
+    <div class="card">
+      <em>"Honestly one of the most reliable engineers I've worked with."</em><br/><br/>
+      <strong>— Teammate, SHPE UF</strong>
+    </div>
+    <div class="card">
+      <em>"He always came prepared and delivered beyond what was asked."</em><br/><br/>
+      <strong>— Peer Mentor Program Colleague</strong>
+    </div>
+  </div>
+</section>
+
+<!-- DARK UX: Trick Question (Pre-checked confusing opt-out) -->
+<div class="contact-section" id="contact">
+  <div class="contact-form">
+    <span class="dark-tag">[DARK UX: Trick Question — Misleading Language]</span>
+    <h2>Let's Connect</h2>
+    <p class="subtitle">Interested in working together? Fill this out and Eduardo will get back to you.</p>
+    <input type="text" placeholder="Your name" />
+    <input type="email" placeholder="Your email" />
+    <textarea placeholder="Your message"></textarea>
+    <!-- DARK UX: Pre-checked + double-negative label. User can't tell if leaving it checked = opt-in or opt-out. -->
+    <div class="checkbox-row">
+      <input type="checkbox" id="comms" checked />
+      <label for="comms">
+        Uncheck this box if you do not wish to not receive updates, networking opportunities,
+        and promotional messages from Eduardo Pena and associated partners.
+      </label>
+    </div>
+    <p style="font-size:0.72em; color:#bbb; margin-bottom:14px;">By clicking Send you agree to the Terms of Service.</p>
+    <button type="button">Send Message — Only responding to the first 3 inquiries this week!</button>
+  </div>
+</div>
+
+<!-- FALLACY + DARK UX KEY -->
+<div class="key">
+  <h2>Fallacy & Dark UX Key</h2>
+  <ol>
+    <li><strong>Slippery Slope — Hero section:</strong> Claims that not reaching out will inevitably lead to losing an opportunity to someone else, with no logical justification for each step in the chain.</li>
+    <li><strong>Appeal to Authority — About section:</strong> Uses Morgan Stanley's selection as proof Eduardo is exceptional, without providing actual performance data or metrics.</li>
+    <li><strong>Ad Populum (Bandwagon) — Experience section:</strong> Argues that because 300 people rely on his work, it must be good — popularity isn't evidence of quality.</li>
+    <li><strong>Appeal to Nature — Skills section:</strong> Claims "organic" experience is inherently more trustworthy than structured training, which isn't necessarily true.</li>
+    <li><strong>False Dichotomy — Options section:</strong> Presents only two choices (hire Eduardo or settle for less), ignoring every other qualified candidate.</li>
+    <li><strong>Hasty Generalization — Testimonials section:</strong> Uses two informal quotes to conclude that "everyone" considers him exceptional — a tiny, non-representative sample.</li>
+  </ol>
+  <h3>Dark UI/UX Element</h3>
+  <p class="dark-desc"><strong>Trick Question / Misleading Language — Contact form:</strong> The checkbox is pre-checked by default,
