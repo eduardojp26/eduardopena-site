@@ -1,117 +1,551 @@
-<div style="font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; color: #222;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eduardo Pena — Future Software Engineer</title>
 
-    <!-- HERO -->
-    <div style="background: linear-gradient(135deg, #1a6b3c, #2ecc71); color: white; padding: 50px 30px; text-align: center;">
-        <h1 style="font-size: 2.5em; margin-bottom: 8px;">VitaMax Pro</h1>
-        <p style="font-size: 1.2em; margin-bottom: 18px;">The only supplement you'll ever need.</p>
-        <p style="font-size: 1em; background: rgba(0,0,0,0.25); display: inline-block; padding: 10px 18px; border-radius: 5px;">
-            <strong>[FALLACY: Slippery Slope]</strong> — Don't wait. If you keep putting this off, your energy crashes, you stop going to the gym, your health gets worse, and honestly at that point you're probably just calling out of work every other week. It all starts here.
-        </p>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #ffffff;
+      --muted-surface: #f6f7fb;
+      --text: #111827;
+      --muted: #4b5563;
+      --border: rgba(17, 24, 39, 0.10);
+      --brand: #1a1a2e;
+      --brand-2: #4f46e5;
+      --success-border: #2ecc71;
+      --warn-bg: #fff8e1;
+      --warn-border: #ffc107;
+      --radius: 14px;
+      --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+      --shadow-sm: 0 6px 18px rgba(17, 24, 39, 0.08);
+      --container: 1100px;
+      --pad-x: 60px;
+      --pad-y: 70px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container {
+      width: min(var(--container), 100% - 2 * var(--pad-x));
+      margin: 0 auto;
+    }
+
+    .section { padding: var(--pad-y) 0; }
+
+    .section h2 {
+      font-size: clamp(1.3rem, 1.1rem + 1vw, 1.7rem);
+      margin: 10px 0 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .section p {
+      color: var(--muted);
+      margin: 0;
+      max-width: 72ch;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 0;
+    }
+
+    .logo { font-weight: 800; letter-spacing: -0.02em; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: rgba(17, 24, 39, 0.78);
+      font-size: 0.95rem;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .nav-links a:hover {
+      background: rgba(79, 70, 229, 0.08);
+      color: rgba(17, 24, 39, 0.92);
+    }
+
+    .hero-wrap {
+      background: radial-gradient(1200px 500px at 20% 0%, rgba(79, 70, 229, 0.12), transparent 60%),
+                  linear-gradient(180deg, var(--muted-surface), #ffffff);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 42px;
+      align-items: center;
+      padding: 62px 0;
+    }
+
+    .avatar {
+      width: 210px;
+      height: 210px;
+      border-radius: 999px;
+      object-fit: cover;
+      object-position: top;
+      border: 5px solid rgba(26, 26, 46, 0.92);
+      box-shadow: var(--shadow-sm);
+      background: #fff;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 1.7rem + 1.6vw, 2.7rem);
+      line-height: 1.1;
+      margin: 0 0 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .sub {
+      color: rgba(17, 24, 39, 0.72);
+      margin: 0 0 14px;
+      max-width: 80ch;
+    }
+
+    .hero p {
+      color: var(--muted);
+      margin: 0 0 16px;
+      max-width: 80ch;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      border: 1px solid transparent;
+      transition: transform 120ms ease, box-shadow 180ms ease, background 180ms ease, border 180ms ease;
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(26, 26, 46, 0.18);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: rgba(79, 70, 229, 0.08);
+      border-color: rgba(79, 70, 229, 0.18);
+      color: rgba(17, 24, 39, 0.88);
+    }
+
+    .btn-ghost:hover { transform: translateY(-1px); }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+    }
+
+    .quote-card {
+      margin-top: 18px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--success-border);
+      padding: 18px;
+      border-radius: 14px;
+      max-width: 620px;
+      box-shadow: var(--shadow-sm);
+      color: rgba(17, 24, 39, 0.92);
+    }
+
+    .authority { background: #f7fffa; }
+    .social { background: #ffffff; }
+    .nature { background: #fbfbfe; }
+    .dichotomy { background: #fffaf0; }
+    .testimonials { background: #ffffff; }
+
+    .list {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: rgba(17, 24, 39, 0.78);
+      line-height: 2.0;
+      max-width: 85ch;
+    }
+
+    .table-wrap { margin-top: 18px; overflow-x: auto; }
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: min(680px, 100%);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.95rem;
+      text-align: left;
+      color: rgba(17, 24, 39, 0.85);
+    }
+
+    thead th {
+      font-weight: 900;
+      color: #fff;
+      border-bottom: none;
+      text-align: center;
+    }
+    thead th:first-child { background: #c0392b; }
+    thead th:last-child  { background: #27ae60; }
+
+    tbody tr:last-child td { border-bottom: none; }
+    tbody td { text-align: center; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .card {
+      grid-column: span 6;
+      background: var(--muted-surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: var(--shadow-sm);
+      color: rgba(17, 24, 39, 0.84);
+    }
+
+    .card strong { color: rgba(17, 24, 39, 0.92); }
+
+    .contact-section { background: #ffffff; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .contact-form {
+      background: var(--warn-bg);
+      border: 1px solid rgba(255, 193, 7, 0.45);
+      border-radius: 18px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-form .subtitle {
+      margin: 8px 0 18px;
+      font-size: 0.95rem;
+      color: rgba(17, 24, 39, 0.68);
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .input, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(17, 24, 39, 0.18);
+      border-radius: 12px;
+      font-size: 0.98rem;
+      font-family: inherit;
+      background: rgba(255, 255, 255, 0.8);
+      transition: border 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .input:focus, textarea:focus {
+      outline: none;
+      border-color: rgba(79, 70, 229, 0.55);
+      box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+      background: #ffffff;
+    }
+
+    textarea { min-height: 110px; resize: vertical; }
+
+    .checkbox-row {
+      display: grid;
+      grid-template-columns: 18px 1fr;
+      align-items: start;
+      gap: 10px;
+      margin: 14px 0 16px;
+    }
+
+    .checkbox-row input { margin-top: 4px; }
+
+    .checkbox-row label {
+      font-size: 0.85rem;
+      color: rgba(17, 24, 39, 0.62);
+      line-height: 1.4;
+    }
+
+    .fineprint {
+      font-size: 0.78rem;
+      color: rgba(17, 24, 39, 0.45);
+      margin: 0 0 14px;
+    }
+
+    .contact-aside .panel {
+      position: sticky;
+      top: 88px;
+    }
+
+    footer {
+      background: var(--brand);
+      color: rgba(255, 255, 255, 0.65);
+      text-align: center;
+      padding: 22px 0;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 900px) {
+      :root { --pad-x: 24px; --pad-y: 44px; }
+      .hero { grid-template-columns: 1fr; text-align: left; }
+      .avatar { width: 160px; height: 160px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .contact-aside .panel { position: static; }
+    }
+
+    @media (max-width: 520px) {
+      .nav-links { gap: 8px; }
+      .nav-links a { padding: 8px; }
+      .cards { gap: 12px; }
+      .card { grid-column: span 12; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="logo">Eduardo Pena</div>
+      <div class="nav-links">
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+  </nav>
 
-    <!-- BANDWAGON SECTION -->
-    <div style="background: #f5f5f5; padding: 35px 30px; text-align: center; border-bottom: 2px solid #ddd;">
-        <h2 style="color: #1a6b3c;">Over 3 million people already made the switch</h2>
-        <p style="color: #555; font-size: 1em;">
-            <strong>[FALLACY: Ad Populum / Bandwagon]</strong> — Honestly if 3 million people are buying this thing it probably works, right? Everyone's doing it. You don't wanna be the one person still dragging through the day when everyone else figured it out.
-        </p>
-    </div>
-
-    <!-- AUTHORITY SECTION -->
-    <div style="padding: 35px 30px; text-align: center;">
-        <h2>A doctor literally recommends it</h2>
-        <p style="color: #444; font-size: 1em;">
-            <strong>[FALLACY: Appeal to Authority]</strong> — Dr. Kevin Marsh, PhD in Molecular Biology, says VitaMax Pro is the real deal. He's a doctor with a PhD. That's basically as credible as it gets. If he's putting his name on it, it works.
-        </p>
-        <div style="display: inline-block; background: #e8f5e9; border-left: 4px solid #2ecc71; padding: 12px 20px; margin-top: 12px; text-align: left;">
-            <em>"This is the most complete supplement formula I've seen in 20 years of research."</em><br>
-            <strong>— Dr. Kevin Marsh, PhD</strong>
+  <header class="hero-wrap">
+    <div class="container">
+      <section class="hero">
+        <img class="avatar" src="eduardoheadshot.JPG" alt="Eduardo Pena" />
+        <div>
+          <h1>Eduardo Pena</h1>
+          <p class="sub">
+            Software Engineering Intern @ Morgan Stanley &nbsp;·&nbsp;
+            UF Computer Science &nbsp;·&nbsp; Builder &amp; Leader
+          </p>
+          <p>
+            If you don't reach out now, someone else will. They'll get the referral, 
+            then the interview, then the offer. And you'll still be sitting here thinking about it.
+          </p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Get in Touch</a>
+            <a class="btn btn-ghost" href="#about">Learn More</a>
+          </div>
         </div>
+      </section>
     </div>
+  </header>
 
-    <!-- NATURE SECTION -->
-    <div style="background: #f0fdf4; padding: 35px 30px; text-align: center; border-top: 2px solid #a7f3d0; border-bottom: 2px solid #a7f3d0;">
-        <h2>All natural. No weird chemicals.</h2>
-        <p style="color: #444; font-size: 1em;">
-            <strong>[FALLACY: Appeal to Nature]</strong> — Every ingredient in VitaMax Pro is 100% plant-based and natural. It comes from the earth, which means your body knows exactly what to do with it. Natural = safe. Simple as that.
-        </p>
+  <section class="section authority" id="about">
+    <div class="container">
+      <h2>Morgan Stanley picked him. That should be enough.</h2>
+      <p>
+        Out of thousands of applicants, Eduardo got the offer. If their team trusted him with real work 
+        at one of the biggest banks in the world, you probably can too.
+      </p>
+      <div class="quote-card">
+        "Eduardo stood out immediately. His technical depth and collaborative mindset made him one of our most
+        impactful interns."<br /><br />
+        <strong>— Senior Director, Advisory Product Technology, Morgan Stanley</strong>
+      </div>
     </div>
+  </section>
 
-    <!-- FALSE DICHOTOMY SECTION -->
-    <div style="background: #fff3cd; padding: 35px 30px; text-align: center;">
-        <h2 style="color: #856404;">Two options. That's it.</h2>
-        <p style="color: #664d03; font-size: 1em;">
-            <strong>[FALLACY: False Dichotomy]</strong> — You either start taking VitaMax Pro and actually feel good, or you keep doing nothing and keep feeling like garbage. There's no in between. So which is it?
-        </p>
-        <table style="margin: 15px auto; border-collapse: collapse; width: 85%;">
+  <section class="section social" id="experience">
+    <div class="container">
+      <h2>Over 300 people already use what he built</h2>
+      <p>
+        As Software Engineering Director at SHPE, Eduardo built tools that 300+ members use every day. 
+        That many people don't just keep using something unless it actually works.
+      </p>
+      <ul class="list">
+        <li><strong>Morgan Stanley</strong> — Technology Summer Intern, Wealth Management Advisory Product Tech (NYC, Summer 2025)</li>
+        <li><strong>SHPE @ UF</strong> — Software Engineering Director (Jan 2024–Present)</li>
+        <li><strong>Machen Florida Opportunity Scholars</strong> — Peer Mentor, Leadership Team (Aug 2023–Present)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section nature">
+    <div class="container">
+      <h2>No bootcamps. No shortcuts. Just real experience.</h2>
+      <p>
+        Eduardo didn't learn this stuff in a 12-week program. His skills came from actual projects, 
+        actual teams, and actual deadlines over years. That kind of experience is just more reliable 
+        than something that was rushed.
+      </p>
+    </div>
+  </section>
+
+  <section class="section dichotomy">
+    <div class="container">
+      <h2>Honestly it's pretty simple.</h2>
+      <p>
+        You work with someone who has real internship experience, led a student engineering org, 
+        and mentored first-gen students — or you don't. Up to you.
+      </p>
+      <div class="table-wrap" role="region" aria-label="Comparison table">
+        <table>
+          <thead>
             <tr>
-                <th style="padding: 10px; border: 1px solid #ccc; background: #dc3545; color: white;">Without VitaMax Pro</th>
-                <th style="padding: 10px; border: 1px solid #ccc; background: #198754; color: white;">With VitaMax Pro</th>
+              <th>Without Eduardo</th>
+              <th>With Eduardo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Slower delivery, missed deadlines</td>
+              <td>Clean code, shipped on time</td>
             </tr>
             <tr>
-                <td style="padding: 8px; border: 1px solid #ccc; text-align: center;">tired, sick, falling behind</td>
-                <td style="padding: 8px; border: 1px solid #ccc; text-align: center; background: #d1e7dd;">energized, healthy, keeping up</td>
+              <td>No leadership or mentorship experience</td>
+              <td>Proven leader at scale</td>
             </tr>
+          </tbody>
         </table>
+      </div>
     </div>
+  </section>
 
-    <!-- TESTIMONIALS / HASTY GENERALIZATION -->
-    <div style="padding: 35px 30px; text-align: center;">
-        <h2>People are noticing a difference</h2>
-        <p style="color: #444; font-size: 1em;">
-            <strong>[FALLACY: Hasty Generalization]</strong> — We checked in with 5 customers after their first week and every single one of them said they felt more energy. That basically proves it works across the board. Hard to argue with that.
-        </p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
-            <div style="background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 6px; padding: 15px; max-width: 210px;">
-                <p><em>"Felt way better by day 3 honestly"</em></p>
-                <strong>— Jess T., Gainesville FL</strong>
-            </div>
-            <div style="background: #f8f9fa; bordmer: 1px solid #dee2e6; border-radius: 6px; padding: 15px; max-width: 210px;">
-                <p><em>"My doctor actually noticed at my checkup"</em></p>
-                <strong>— Mike R., Tampa FL</strong>
-            </div>
+  <section class="section testimonials">
+    <div class="container">
+      <h2>Everyone who's worked with him says the same thing</h2>
+      <p>
+        We reached out to people who've worked with Eduardo and they all said he was great. 
+        Every single one. At some point that's just not a coincidence anymore.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <em>"Honestly one of the most reliable engineers I've worked with."</em><br /><br />
+          <strong>— Teammate, SHPE UF</strong>
         </div>
+        <div class="card">
+          <em>"He always came prepared and delivered beyond what was asked."</em><br /><br />
+          <strong>— Peer Mentor Program Colleague</strong>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- DARK UI/UX: Trick Question / Misleading Language (pre-checked, double negative) -->
-    <div style="background: #fff8e1; border: 2px solid #ffc107; padding: 25px 30px; margin: 15px 0;">
-        <h3 style="color: #333;">Get your discount code</h3>
-        <p style="color: #555; font-size: 0.95em;">Drop your email and we'll send you 20% off your first order:</p>
-        <input type="text" placeholder="your@email.com" style="width: 78%; padding: 9px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px;" />
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form">
+          <h2 style="margin:0;">Let's Connect</h2>
+          <p class="subtitle">Interested in working together? Fill this out and Eduardo will get back to you.</p>
 
-        <!-- DARK UX ELEMENT: Trick Question (Misleading Language) -->
-        <!-- This uses the same double-negative pattern described in the reading: "Don't uncheck this box if you do not want to receive updates" — the user has no idea if checking means opt-in or opt-out -->
-        <div style="margin-bottom: 10px;">
-            <input type="checkbox" id="emailPref" checked style="margin-right: 6px;" />
-            <label for="emailPref" style="font-size: 0.85em; color: #666;">
-                <strong>[DARK UX: Trick Question — Misleading Language]</strong> — Uncheck this box if you do not wish to not receive emails, offers, and updates from VitaMax Pro and selected partners.
+          <div class="field">
+            <input class="input" type="text" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <input class="input" type="email" placeholder="Your email" />
+          </div>
+          <div class="field">
+            <textarea placeholder="Your message"></textarea>
+          </div>
+
+          <div class="checkbox-row">
+            <input type="checkbox" id="comms" checked />
+            <label for="comms">
+              Uncheck this box if you do not wish to not receive updates, networking opportunities,
+              and promotional messages from Eduardo Pena and associated partners.
             </label>
+          </div>
+
+          <p class="fineprint">By clicking Send you agree to the Terms of Service.</p>
+
+          <button class="btn btn-primary" type="button">
+            Send Message — Only responding to the first 3 inquiries this week!
+          </button>
         </div>
-        <p style="font-size: 0.72em; color: #bbb;">By clicking below you agree to the Terms of Service.</p>
-        <button style="background: #2ecc71; color: white; padding: 12px 26px; font-size: 1.05em; border: none; border-radius: 5px; cursor: pointer;">
-            Send me my discount — only a few spots left!
-        </button>
-    </div>
 
-    <!-- FOOTER -->
-    <div style="background: #222; color: #999; padding: 18px 30px; font-size: 0.78em; text-align: center;">
-        <p>*Not evaluated by the FDA. VitaMax Pro is not intended to diagnose, treat, or cure any disease.</p>
-        <p>&copy; 2026 VitaMax Pro LLC.</p>
+        <aside class="contact-aside">
+          <div class="panel">
+            <h2 style="margin:0 0 10px;">Quick links</h2>
+            <p style="margin:0; color: rgba(17,24,39,0.68);">
+              Add your LinkedIn/GitHub here later, or keep this as a "what I'm looking for" box.
+            </p>
+            <div style="height:12px;"></div>
+            <a class="btn btn-ghost" href="#experience">View Experience</a>
+          </div>
+        </aside>
+      </div>
     </div>
+  </section>
 
-    <!-- FALLACY + DARK UX KEY (for grading) -->
-    <div style="background: #eef2ff; border: 2px dashed #4f46e5; padding: 25px 30px; margin-top: 18px;">
-        <h2 style="color: #4f46e5;">Fallacy &amp; Dark UX Key</h2>
-        <ol style="font-size: 0.97em; color: #333; line-height: 1.9;">
-            <li><strong>Ad Populum (Bandwagon) — "Over 3 million people" section:</strong> Uses the fact that a lot of people buy the product as the reason you should too, which isn't actually evidence it works.</li>
-            <li><strong>Appeal to Authority — "A doctor literally recommends it" section:</strong> Cites a PhD's endorsement as proof the product is effective, without providing any actual data or studies.</li>
-            <li><strong>Appeal to Nature — "All natural" section:</strong> Claims that because VitaMax Pro is natural, it's automatically safe — ignoring that plenty of natural things are harmful.</li>
-            <li><strong>False Dichotomy — "Two options" section:</strong> Frames the choice as either buying VitaMax Pro or feeling awful forever, leaving out every other option (sleep, diet, exercise, other supplements, etc.).</li>
-            <li><strong>Hasty Generalization — "People are noticing a difference" section:</strong> Surveys 5 customers, all of whom say they felt better, and uses that to claim it works for everyone.</li>
-            <li><strong>Slippery Slope — Hero/banner section:</strong> Implies that if you don't buy right now, you'll inevitably spiral into poor health and missing work, without any logical justification for that chain of events.</li>
-        </ol>
-        <h3 style="color: #4f46e5; margin-top: 15px;">Dark UI/UX Element</h3>
-        <p><strong>Trick Question / Misleading Language — discount signup section:</strong> The checkbox is pre-checked by default, and the label uses a double negative: "Uncheck this box if you do not wish to NOT receive emails." This is taken directly from the type of example in the reading — the user genuinely can't tell whether leaving it checked means they're opting in or out. It exploits cognitive laziness so most people just leave it and end up subscribed without meaning to.</p>
-    </div>
+  <footer>
+    <div class="container">© <span id="year"></span> Eduardo Pena. All rights reserved.</div>
+  </footer>
 
-</div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
